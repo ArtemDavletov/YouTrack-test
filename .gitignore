@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+
+# PyCharm unnecessary source
+/.idea
+
+# Virtual environment
+/venv
+/venv3.8
+
+# Pytest cache
+.pytest_cache/
+*/.pytest_cache/
