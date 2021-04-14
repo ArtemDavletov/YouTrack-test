@@ -30,7 +30,7 @@ class AVLTree:
         return " ".join(str(node.value) for node in self.__tree_generator())
 
     def to_list(self) -> List[int]:
-        return [node.value for node in self.__tree_generator()]
+        return [node.value for node in self.gen()]
 
     def __tree_generator(self) -> Iterable:
         visited = set()
@@ -53,6 +53,21 @@ class AVLTree:
             if node.right_child not in visited:
                 if node.right_child is not None:
                     queue.append(node.right_child)
+
+    def gen(self):
+        if self.root is None:
+            return
+
+        queue = [self.root]
+
+        for node in queue:
+            yield node
+
+            if node.left_child:
+                queue.append(node.left_child)
+
+            if node.right_child:
+                queue.append(node.right_child)
 
     def print_tree(self):
         """
@@ -103,7 +118,7 @@ class AVLTree:
         return node
 
     @staticmethod
-    def _get_height(node: AVLNode) -> int:
+    def get_height(node: AVLNode) -> int:
         return 0 if node is None else node.height
 
     @staticmethod
@@ -143,8 +158,8 @@ class AVLTree:
 
         path.appendleft(cur_node)
 
-        left_height = self._get_height(cur_node.parent.left_child)
-        right_height = self._get_height(cur_node.parent.right_child)
+        left_height = self.get_height(cur_node.parent.left_child)
+        right_height = self.get_height(cur_node.parent.right_child)
 
         if abs(left_height - right_height) > 1:
             path.appendleft(cur_node.parent)
@@ -202,10 +217,10 @@ class AVLTree:
                 left_child.parent.right_child = left_child
 
         # Set new height
-        node.height = 1 + max(self._get_height(node.left_child),
-                              self._get_height(node.right_child))
-        left_child.height = 1 + max(self._get_height(left_child.left_child),
-                                    self._get_height(left_child.right_child))
+        node.height = 1 + max(self.get_height(node.left_child),
+                              self.get_height(node.right_child))
+        left_child.height = 1 + max(self.get_height(left_child.left_child),
+                                    self.get_height(left_child.right_child))
 
     def _left_rotation(self, node: AVLNode) -> None:  # Нужно перепроверить
         node_parent = node.parent
@@ -231,10 +246,10 @@ class AVLTree:
                 right_child.parent.right_child = right_child
 
         # Set new height
-        node.height = 1 + max(self._get_height(node.left_child),
-                              self._get_height(node.right_child))
-        right_child.height = 1 + max(self._get_height(right_child.left_child),
-                                     self._get_height(right_child.right_child))
+        node.height = 1 + max(self.get_height(node.left_child),
+                              self.get_height(node.right_child))
+        right_child.height = 1 + max(self.get_height(right_child.left_child),
+                                     self.get_height(right_child.right_child))
 
 
 if __name__ == "__main__":

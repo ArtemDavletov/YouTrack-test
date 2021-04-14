@@ -23,6 +23,8 @@ def test_tree_insertion(values_for_inserting, balanced_tree_in_list):
         avl_tree.insert(value)
 
     assert avl_tree.to_list() == balanced_tree_in_list
+    if avl_tree.root:
+        assert abs(AVLTree.get_height(avl_tree.root.left_child) - AVLTree.get_height(avl_tree.root.right_child)) <= 1
 
 
 @pytest.mark.parametrize(
