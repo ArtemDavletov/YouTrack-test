@@ -263,5 +263,7 @@ if __name__ == "__main__":
         print(f"        Insert: {i}")
         tree.print_tree()
         print(tree.get_node_by_value(i))
+        is_balanced = abs(AVLTree.get_height(tree.root.left_child) - AVLTree.get_height(tree.root.right_child)) <= 1
+        print(f"Is balanced: {is_balanced}")
         print(tree)
         print("*************************")

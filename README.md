@@ -18,6 +18,7 @@ In this test task was implemented AVLTree with next public methods:
   └2┤
     └1
 AVLNode: self.value=5, self.height=1
+Is balanced: True
 4 2 7 1 3 6 8 5
 ```
 
